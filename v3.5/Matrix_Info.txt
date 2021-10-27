@@ -1,0 +1,138 @@
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+--- MyException.h (Info) ---
+Was created and wroten by Pavel Chekalov in March 2020
+All rights reserved
+-----------------------------------------------------------------------------------
+--- Targets ---
+Catching errors by try-catch blocks
+--- Included libraries ---
+iostream ; fstream ; string
+-----------------------------------------------------------------------------------
+--- Types ---
+MyException{ int , std::string }
+--- Constructors ---
+() ; (int) ; (int,std::sting) ; (const MyException&)
+operator=(const MyException&)
+--- Destructors ---
+default
+-----------------------------------------------------------------------------------
+--- Print functions ---
+MyException.Print(std::ostream&)
+std::ostream& operator<< (std::ostream&, const MyException&)
+--- Scan functions ---
+no
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+--- VectorNd.h (Info) ---
+Was created and wroten by Pavel Chekalov in September 2021
+All rights reserved
+-----------------------------------------------------------------------------------
+--- Targets ---
+Template library for algepra
+--- Included libraries ---
+ MyException.h 
+--- Requests ---
+T* new[](int) ; T* new delete[] ; operator<< (std::ostream&,const T&)
+operator>> (std::istream&,const T&) ; operator= (const T&)
+T operator+ (const T&,const T&) ; T operator- (const T&,const T&)
+T operator* (const T&,const T&) ; T operator/ (const T&,const T&)
+--- Spesial Requests ---
+bool Is_Equal(const T&,const T&)
+--- Warning ---
+This function must be pre-declarated BEFORE including this library
+-----------------------------------------------------------------------------------
+--- Types ---
+VectorNd <class T> {int size, T* data}
+--- Constructors ---
+();explicit(int);(const VectorNd<T>&)
+operator=(VectorNd<T>,const VectorNd<T>&)
+--- Types changing ---
+<class D> VectorNd<D>(const VectorNd<T>&)
+--- Warning ---
+Types changing from VectorNd<T> to VectorNd<D> needs types changing from T to D and explicit declaration.
+--- Destructors ---
+delete [] data
+-----------------------------------------------------------------------------------
+--- Memory access ---
+T& operator[](int) ; const T& operator[](int)const
+int VectorNd.size() ; bool VectorNd.TestId(int)
+--- Comparison functions ---
+bool operator== (const VectorNd<T>&,const VectorNd<T>&) ; bool operator!= (const VectorNd<T>&,const VectorNd<T>&)
+bool operator== (const VectorNd<T>&,const T&) ; bool Is_Equal(const VectorNd<T>&,const VectorNd<T>&)
+--- Math functions ---
+VectorNd<T> operator+ (const VectorNd<T>&,const VectorNd<T>&)
+VectorNd<T> operator- (const VectorNd<T>&,const VectorNd<T>&)
+VectorNd<T> operator* (const VectorNd<T>&,const T&)
+VectorNd<T> operator* (const T&,const VectorNd<T>&) ; VectorNd<T> operator/ (const VectorNd<T>&,const T&)
+T operator^ (const VectorNd<T>&,const VectorNd<T>&) --- scalar product
+--- Print functions ---
+VectorNd.Print(std::ostream&)
+std::ostream& operator<< (std::ostream&, const VectorNd<T>&)
+--- Scan functions ---
+VectorNd.Scan(std::istream&)
+std::istream& operator>> (std::istream&, const VectorNd<T>&)
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+--- Matrix.h (Info) ---
+Was created and wroten by Pavel Chekalov in September 2021
+All rights reserved
+-----------------------------------------------------------------------------------
+--- Targets ---
+Template library for algepra
+--- Included libraries ---
+ VectorNd.h (in file " matrix.h ")
+--- Requests ---
+T* new[](int) ; T* new delete[] ; operator<< (std::ostream&,const T&)
+operator>> (std::istream&,const T&) ; operator= (const T&)
+T operator+ (const T&,const T&) ; T operator- (const T&,const T&)
+T operator* (const T&,const T&) ; T operator/ (const T&,const T&)
+--- Spesial Requests ---
+bool Is_Equal(const T&,const T&), bool Cannot_Be_Divided(const T&)
+--- Warning ---
+This functions must be pre-declarated BEFORE including this library
+-----------------------------------------------------------------------------------
+--- Types ---
+Matrix <class T> {int rows,int cols, VectorNd<T>* rows}
+--- Constructors ---
+();explicit (int,int);explicit (std::pair<int,int>);explicit (const VectorNd<T>&);(const Matrix<T>&)
+operator=(Matrix<T>,const Matrix<T>&)
+--- Types changing ---
+<class D> Matrix<D>(const Matrix<T>&)
+--- Warning ---
+Types changing from Matrix<T> to Matrix<D> needs types changing from T to D and explicit declaration.
+--- Destructors ---
+delete [] rows
+-----------------------------------------------------------------------------------
+--- Memory access ---
+VectorNd<T>& operator[](int) ; const VectorNd<T>& operator[](int)const
+std::pair<int,int> Matrix.size() ; int Matrix.cols(); int Matrix.rows() ; bool Matrix.TestId(int,int)
+--- Comparison functions ---
+bool operator== (const Matrix<T>&,const Matrix<T>&)
+bool operator!= (const Matrix<T>&,const Matrix<T>&)
+bool operator== (const Matrix<T>&,const VectorNd<T>&) ; bool operator== (const Matrix<T>&,const T&)
+bool Is_Equal(const Matrix<T>&,const Matrix<T>&)
+--- Math functions ---
+Matrix<T> operator+ (const Matrix<T>&,const Matrix<T>&) ; Matrix<T> operator- (const Matrix<T>&,const Matrix<T>&)
+Matrix<T> operator* (const Matrix<T>&,const T&) ; Matrix<T> operator* (const T&,const Matrix<T>&)
+Matrix<T> operator/ (const Matrix<T>&,const T&)
+Matrix<T> operator* (const Matrix<T>&,const Matrix<T>&) ; Matrix<T> operator/ (const Matrix<T>&,const Matrix<T>&)
+--- Math methods ---
+bool Matrix.Is_Degenerate() ; bool Matrix.Is_Squared() ; Matrix<T> Matrix.RUnion(const Matrix<T>&) ( A.(B) --> (A|B) )
+Matrix<T> Matrix.Transponed() ; Matrix<T> Matrix.Minor(int row,int col) ; T Matrix.Det() ; T Matrix.det() (by Gauss method)
+Matrix<T> Matrix.Const_Rows_Sorting([int&]) ; Matrix<T> Matrix.Gauss_Down([int&]) ; Matrix<T> Matrix.Gauss([int&])
+ [int&] - optonal argument for counting rows rotation in rows sorting 
+Matrix<T> Matrix.Inversed()
+-----------------------------------------------------------------------------------
+--- Print functions ---
+Matrix.Print(std::ostream&)
+std::ostream& operator<< (std::ostream&, const Matrix<T>&)
+--- Scan functions ---
+Matrix.Scan(std::istream&)
+std::istream& operator>> (std::istream&, const Matrix<T>&)
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
